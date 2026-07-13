@@ -6,7 +6,6 @@
 <title>ใบสมัครงาน — พนักงานขายหน้าร้านและออนไลน์ | BANANA PARTNER KHON KAEN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   :root{
     --navy:#1E293B;
@@ -172,6 +171,19 @@
     table.mini{font-size:13px;}
     #summaryView .kv{grid-template-columns:1fr; gap: 2px;}
     #summaryView .sec { padding: 16px; }
+  }
+
+  /* ================= สไตล์สำหรับควบคุมการพิมพ์และการบันทึก PDF ของระบบเครื่องให้สวยงาม 100% ================= */
+  @media print{
+    .topbar, .submit-bar, .footer-note, #formView, .no-print{display:none !important;}
+    #summaryView{display:block !important; padding: 0 !important; margin: 0 !important;}
+    body{background:#fff; color: #000;}
+    #summaryView .sec { 
+      page-break-inside: avoid; /* ป้องกันไม่ให้เนื้อหาถูกตัดครึ่งข้อระหว่างเปลี่ยนหน้ากระดาษ */
+      border: 1px solid #cbd5e1;
+      box-shadow: none;
+      margin-bottom: 15px;
+    }
   }
 </style>
 </head>
@@ -471,13 +483,10 @@
 </div>
 
 <div class="wrap" id="summaryView">
-  <div id="pdfArea" style="background:#fff; padding:10px; border-radius:8px;">
-    <div id="summaryContent"></div>
-  </div>
-  
+  <div id="summaryContent"></div>
   <div class="submit-bar no-print">
     <button type="button" class="btn btn-ghost" onclick="backToForm()">← แก้ไข</button>
-    <button type="button" class="btn btn-gold" onclick="downloadPDF()">🖨 บันทึก PDF</button>
+    <button type="button" class="btn btn-gold" onclick="window.print()">🖨 บันทึก PDF</button>
     <button type="button" class="btn btn-navy" onclick="downloadData()">⬇ โหลดข้อความ .txt</button>
     <button type="button" class="btn btn-line" onclick="sendToLineHR()">💬 ส่งแชต LINE</button>
   </div>
@@ -690,24 +699,6 @@ function downloadData(){
   a.href = url; a.download = `ใบสมัคร_${name}.txt`;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
-}
-
-// ใหม่: ฟังก์ชันแปลงหน้าสรุปผลให้ดาวน์โหลดเป็นไฟล์ PDF ลงมือถือได้ทันที 100%
-function downloadPDF() {
-  const element = document.getElementById('pdfArea');
-  const name = val("full_name_th") || "ผู้สมัคร";
-  
-  // ตั้งค่าการแปลงหน้าเอกสาร HTML เป็น PDF
-  const opt = {
-    margin:       10,
-    filename:     `ใบสมัคร_${name}.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true },
-    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  };
-
-  // ดำเนินการสร้างไฟล์และสั่งดาวน์โหลดลงเครื่องอัตโนมัติ
-  html2pdf().set(opt).from(element).save();
 }
 
 function sendToLineHR(){
