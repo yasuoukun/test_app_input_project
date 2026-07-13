@@ -175,6 +175,7 @@
     border-radius:12px; font-size:13.5px; margin-bottom:24px; line-height: 1.6;
     box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   }
+
   @media (max-width:640px){
     .grid, .grid.g3{grid-template-columns:1fr;}
     .sig-row{grid-template-columns:1fr;}
@@ -514,7 +515,7 @@ const skills = [
   ["ถ่ายภาพสินค้า ทำคลิปสั้นด้วย CapCut / Canva","skill8"],
   ["ใช้ POS / ระบบสต๊อก / เช็กสินค้า / รับชำระเงิน","skill9"],
   ["ใช้ Excel / Google Sheets / ทำรายงานยอดขาย","skill10"],
-  ["จัดหน้าร้าน เเติมสินค้า ตรวจราคา และดูแลความเรียบร้อย","skill11"],
+  ["จัดหน้าร้าน เติมสินค้า ตรวจราคา และดูแลความเรียบร้อย","skill11"],
   ["รับเรื่องเคลม ประสานงานซ่อม และดูแลลูกค้าหลังการขาย","skill12"],
 ];
 const skillBody = document.querySelector("#skillTable tbody");
@@ -608,7 +609,7 @@ function reviewForm(){
   [["edu1","มัธยม/ปวช."],["edu2","ปวส./อนุปริญญา"],["edu3","ปริญญาตรี/อื่น ๆ"]].forEach(([k,label])=>{
     const school = val(k+"_school"), major = val(k+"_major"), year = val(k+"_year"), gpa = val(k+"_gpa");
     if(school||major||year||gpa){
-      eduRows += `<div class="kv"><b>${label}</b><span>${school\vert{}\vert{}"-"} \vert{} สาขา ${major||"-"} | ปีที่จบ ${year\vert{}\vert{}"-"} \vert{} เกรด ${gpa||"-"}</span></div>`;
+      eduRows += `<div class="kv"><b>${label}</b><span>${school||"-"} | สาขา ${major||"-"} | ปีที่จบ ${year||"-"} | เกรด ${gpa||"-"}</span></div>`;
     }
   });
 
@@ -616,21 +617,21 @@ function reviewForm(){
   for(let i=1;i<=workRowCount;i++){
     const c = val(`work${i}_company`);
     if(!c) continue;
-    workRows += `<div class="kv"><b>${c}</b><span>ตำแหน่ง ${val('work'+i+'_position')||'-'} | ระยะเวลา ${val('work'+i+'_duration')\vert{}\vert{}'-'} \vert{} เงินเดือน ${val('work'+i+'_salary')||'-'} | หน้าที่ ${val('work'+i+'_duties')\vert{}\vert{}'-'} \vert{} เหตุผลที่ออก ${val('work'+i+'_reason')||'-'}</span></div>`;
+    workRows += `<div class="kv"><b>${c}</b><span>ตำแหน่ง ${val('work'+i+'_position')||'-'} | ระยะเวลา ${val('work'+i+'_duration')||'-'} | เงินเดือน ${val('work'+i+'_salary')||'-'} | หน้าที่ ${val('work'+i+'_duties')||'-'} | เหตุผลที่ออก ${val('work'+i+'_reason')||'-'}</span></div>`;
   }
   if(!workRows) workRows = `<div class="kv"><span>ไม่ได้กรอกประวัติการทำงาน</span></div>`;
 
   let skillRows = "";
   skills.forEach(([label,key])=>{
     const score = val(key+"_score"), note = val(key+"_note");
-    if(score || note) skillRows += `<div class="kv"><b>${label}</b><span>ระดับ ${score\vert{}\vert{}"-"}/3 ${note?(" — "+note):""}</span></div>`;
+    if(score || note) skillRows += `<div class="kv"><b>${label}</b><span>ระดับ ${score||"-"}/3 ${note?(" — "+note):""}</span></div>`;
   });
   if(!skillRows) skillRows = `<div class="kv"><span>ไม่ได้ประเมินทักษะ</span></div>`;
 
   let refRows = "";
   [1,2].forEach(i=>{
     const n = val(`ref${i}_name`);
-    if(n) refRows += `<div class="kv"><b>${n}</b><span>${val('ref'+i+'_relation')||'-'} | ${val('ref'+i+'_company')\vert{}\vert{}'-'} \vert{} โทร ${val('ref'+i+'_phone')||'-'}</span></div>`;
+    if(n) refRows += `<div class="kv"><b>${n}</b><span>${val('ref'+i+'_relation')||'-'} | ${val('ref'+i+'_company')||'-'} | โทร ${val('ref'+i+'_phone')||'-'}</span></div>`;
   });
   if(!refRows) refRows = `<div class="kv"><span>ไม่ได้ระบุบุคคลอ้างอิง</span></div>`;
 
@@ -647,4 +648,80 @@ function reviewForm(){
       ${line("รูปแบบงาน","job_type")}${line("มีพาหนะส่วนตัว","own_vehicle")}${line("ทำงานวันหยุด/นักขัตฤกษ์ได้","holiday_work")}${line("ยืนขาย/ทำงานเป็นกะได้","shift_work")}
     </div>
     <div class="sec"><h4>2. ข้อมูลส่วนตัว</h4>
-      ${line("ชื่อ-นามสก
+      ${line("ชื่อ-นามสกุล (ไทย)","full_name_th")}${line("ชื่อเล่น","nickname")}${line("Name (English)","full_name_en")}${line("เพศ","gender")}
+      ${line("วันเกิด","dob")}${line("อายุ","age")}${line("เลขบัตรประชาชน","id_card")}${line("โทรศัพท์","phone")}
+      ${line("LINE ID","line_id")}${line("Social","social")}${line("อีเมล","email")}${line("ที่อยู่","address")}
+      ${line("จังหวัด","province")}${line("รหัสไปรษณีย์","zipcode")}
+      ${line("ผู้ติดต่อฉุกเฉิน","emergency_name")}${line("ความสัมพันธ์","emergency_relation")}${line("โทรศัพท์ฉุกเฉิน","emergency_phone")}
+    </div>
+    <div class="sec"><h4>3. ข้อมูลการศึกษา</h4>${eduRows}</div>
+    <div class="sec"><h4>4. ประวัติการทำงาน</h4>${workRows}
+      ${line("ยอดขายสูงสุดที่เคยทำได้","best_sales")}${line("สินค้าที่ถนัดขาย","best_product")}
+    </div>
+    <div class="sec"><h4>5. ทักษะการขายและการใช้งานระบบ</h4>${skillRows}</div>
+    <div class="sec"><h4>6. คำถามคัดกรองงานขาย</h4>
+      <div class="kv"><b>1) เหตุผลที่สนใจ</b><span>${val("q1")||"-"}</span></div>
+      <div class="kv"><b>2) ตอบเรื่องราคา</b><span>${val("q2")||"-"}</span></div>
+      <div class="kv"><b>3) จัดการแชตหลายราย</b><span>${val("q3")||"-"}</span></div>
+      <div class="kv"><b>4) ตัวอย่างปิดการขาย</b><span>${val("q4")||"-"}</span></div>
+      <div class="kv"><b>5) เป้าหมายรายได้</b><span>${val("q5")||"-"}</span></div>
+    </div>
+    <div class="sec"><h4>7. ข้อมูลเพิ่มเติม</h4>
+      ${line("ประสบการณ์มือถือ/ไอที","it_exp")}${line("รายละเอียด","it_exp_detail")}
+      ${line("เดินทางไปอบรม/ต่างสาขาได้","travel_ok")}${line("ทำ OT ได้","ot_ok")}
+      ${line("ข้อจำกัดเวลา","time_limit")}${line("รายละเอียดข้อจำกัด","time_limit_detail")}
+      ${line("ภาระผูกพันงานเดิม","prior_job_bond")}${line("ถึงวันที่","prior_job_bond_date")}
+      ${line("เคยถูกเลิกจ้าง","terminated")}${line("รายละเอียด","terminated_detail")}
+      ${line("คดีความ/ประวัติกระทบงาน","legal_issue")}${line("รายละเอียด","legal_issue_detail")}
+      <div class="kv"><b>ทราบข่าวจาก</b><span>${sourceList.join(", ")||"-"}</span></div>
+      ${line("ผู้แนะนำ","referrer")}
+    </div>
+    <div class="sec"><h4>8. บุคคลอ้างอิง</h4>${refRows}</div>
+    <div class="sec"><h4>9. เอกสารประกอบการสมัคร</h4><div class="kv"><span>${docList.join(", ")||"ไม่ได้ระบุ"}</span></div></div>
+    <div class="sec"><h4>10. คำรับรองและลายเซ็น</h4>
+      <div class="kv"><b>ยินยอมตามเงื่อนไข</b><span>${document.getElementById("consentCheck").checked ? "ยินยอม" : "-"}</span></div>
+      ${line("ลงชื่อผู้สมัคร","signature")}${line("วันที่ลงนาม","signature_date")}
+    </div>
+  `;
+
+  document.getElementById("formView").style.display = "none";
+  document.getElementById("summaryView").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function backToForm(){
+  document.getElementById("summaryView").style.display = "none";
+  document.getElementById("formView").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function buildPlainText(){
+  const div = document.createElement("div");
+  div.innerHTML = document.getElementById("summaryContent").innerHTML;
+  return div.innerText.replace(/\n{3,}/g,"\n\n");
+}
+
+function downloadData(){
+  const text = buildPlainText();
+  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const name = val("full_name_th") || "ผู้สมัคร";
+  a.href = url; a.download = `ใบสมัคร_${name}.txt`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function sendToLineHR(){
+  const rawLineId = document.getElementById("hrLineId").value.trim();
+  const cleanLineId = rawLineId.replace('@', '');
+  
+  // แปลงค่า @ ให้เป็น %40 สำหรับระบบ LINE OA API มาตรฐานสากล
+  const lineUrl = `https://line.me/R/ti/p/%40${cleanLineId}`;
+  
+  alert("ระบบจะนำคุณไปที่แอป LINE เพื่อเปิดหน้าโปรไฟล์กลุ่ม/ร้านค้าของฝ่ายบุคคล\n\nเมื่อเปิดแอปแล้ว ให้กดปุ่ม 'แชต' และส่งไฟล์ข้อมูลหรือใบสมัคร PDF ที่บันทึกไว้ได้เลยครับ");
+  window.location.href = lineUrl;
+}
+</script>
+</body>
+</html>
