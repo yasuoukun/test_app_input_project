@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใบสมัครงาน — พนักงานขายหน้าร้านและออนไลน์ | BANANA PARTNER KHON KAEN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1F2D3D;
+    --blue:#2E5C8A;
+    --light-blue:#EAF1F8;
+    --gold:#E8A93A;
+    --gold-dark:#B8790E;
+    --gray:#5A6672;
+    --line:#D8DEE6;
+    --bg:#F4F6F9;
+    --ok:#1E7A46;
+    --err:#B3261E;
+    --line-green:#06C755;
+    --line-green-dark:#05B04B;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:#22282f;
+    font-family:'Noto Sans Thai','Noto Sans',sans-serif;
+    font-size:15px; line-height:1.55;
+  }
+  .topbar{
+    background:linear-gradient(135deg,var(--navy),var(--blue));
+    color:#fff; padding:26px 20px 34px;
+  }
+  .topbar-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .badge{
+    background:var(--gold); color:var(--navy); font-weight:800; font-size:13px;
+    padding:6px 12px; border-radius:999px; letter-spacing:.5px;
+  }
+  .topbar h1{margin:10px 0 2px; font-size:24px; font-weight:800;}
+  .topbar h2{margin:0; font-size:15px; font-weight:500; opacity:.9;}
+  .topbar .en{font-size:13px; opacity:.75; margin-top:4px;}
+  .wrap{max-width:900px;margin:-18px auto 60px; padding:0 16px;}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:22px 22px 6px; margin-bottom:18px; box-shadow:0 1px 3px rgba(20,30,50,.06);
+  }
+  .card h3{
+    margin:0 0 4px; font-size:17px; color:var(--navy); font-weight:800;
+    display:flex; align-items:center; gap:8px;
+  }
+  .step-num{
+    background:var(--navy); color:#fff; width:26px;height:26px; border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center; font-size:13px; flex:none;
+  }
+  .card > p.hint{color:var(--gray); font-size:13px; margin:0 0 14px;}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px 18px;}
+  .grid.g3{grid-template-columns:1fr 1fr 1fr;}
+  .field-group{margin-bottom:16px;}
+  .field-group.full{grid-column:1 / -1;}
+  label.lbl{display:block; font-weight:600; font-size:13.5px; margin-bottom:6px; color:#333;}
+  label.lbl .req{color:var(--err); margin-left:2px;}
+  input[type=text], input[type=tel], input[type=email], input[type=date], input[type=number], textarea, select{
+    width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
+    font-family:inherit; font-size:14.5px; background:#fcfdfe;
+  }
+  input:focus, textarea:focus, select:focus{outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue);}
+  textarea{resize:vertical; min-height:56px;}
+  .choice-row{display:flex; flex-wrap:wrap; gap:8px 18px;}
+  .choice{display:inline-flex; align-items:center; gap:6px; font-size:14px; cursor:pointer;}
+  .choice input{accent-color:var(--blue); width:16px; height:16px;}
+  table.mini{width:100%; border-collapse:collapse; margin-top:4px;}
+  table.mini th{
+    background:var(--light-blue); color:var(--navy); font-size:12.5px; font-weight:700;
+    padding:8px 6px; text-align:left; border:1px solid var(--line);
+  }
+  table.mini td{border:1px solid var(--line); padding:5px; vertical-align:top;}
+  table.mini td input, table.mini td select{border:1px solid transparent; background:transparent; padding:6px 5px;}
+  table.mini td input:focus, table.mini td select:focus{background:#fff; border-color:var(--blue);}
+  .row-actions{margin-top:8px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:6px; border:none; border-radius:9px;
+    padding:10px 18px; font-size:14.5px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+  .btn-ghost{background:#fff; border:1px solid var(--blue); color:var(--blue);}
+  .btn-ghost:hover{background:var(--light-blue);}
+  .btn-gold{background:var(--gold); color:var(--navy);}
+  .btn-gold:hover{background:var(--gold-dark); color:#fff;}
+  .btn-navy{background:var(--navy); color:#fff;}
+  .btn-navy:hover{background:#111a24;}
+  .btn-line{background:var(--line-green); color:#fff;}
+  .btn-line:hover{background:var(--line-green-dark);}
+  .btn-sm{padding:6px 12px; font-size:13px;}
+  .photo-box{
+    width:110px; height:140px; border:2px dashed var(--line); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size:12px; color:var(--gray); overflow:hidden; flex:none; cursor:pointer; background:#fafbfc;
+  }
+  .photo-box img{width:100%; height:100%; object-fit:cover;}
+  .skill-desc{color:var(--gray); font-size:12.5px; margin-bottom:6px;}
+  .consent-box{
+    background:var(--light-blue); border:1px solid #cfe0f0; border-radius:10px; padding:14px 16px;
+    font-size:13.5px; color:#2a3240; line-height:1.7;
+  }
+  .sig-row{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px;}
+  .submit-bar{
+    position:sticky; bottom:0; background:#fff; border-top:1px solid var(--line);
+    padding:14px 16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; z-index:5;
+    box-shadow:0 -2px 10px rgba(0,0,0,.05);
+  }
+  .footer-note{max-width:900px;margin:0 auto 40px;padding:0 16px;color:var(--gray);font-size:12.5px;text-align:center;}
+  #summaryView{display:none;}
+  #summaryView h1{color:var(--navy); font-size:20px; border-bottom:3px solid var(--gold); padding-bottom:8px;}
+  #summaryView .sec{margin-bottom:16px;}
+  #summaryView .sec h4{color:var(--blue); font-size:14.5px; margin:0 0 6px; border-bottom:1px solid var(--line); padding-bottom:4px;}
+  #summaryView .kv{display:grid; grid-template-columns:230px 1fr; gap:4px 10px; font-size:13.5px; margin-bottom:3px;}
+  #summaryView .kv b{color:#333;}
+  .banner{
+    background:#FFF7E6; border:1px solid #F3D48A; color:#7a5b12; padding:10px 14px;
+    border-radius:8px; font-size:13px; margin-bottom:16px;
+  }
+  @media (max-width:640px){
+    .grid, .grid.g3{grid-template-columns:1fr;}
+    .sig-row{grid-template-columns:1fr;}
+    table.mini{font-size:12.5px;}
+  }
+  @media print{
+    .topbar, .submit-bar, .footer-note, #formView, .no-print{display:none !important;}
+    #summaryView{display:block !important;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="badge">BANANA PARTNER KHON KAEN</span>
+  </div>
+  <div class="topbar-inner" style="margin-top:6px;">
+    <div>
+      <h1>ใบสมัครงาน — ตำแหน่งพนักงานขายหน้าร้านและออนไลน์</h1>
+      <h2>Retail &amp; Online Sales Staff — Online Application Form</h2>
+      <div class="en">กรอกข้อมูลให้ครบถ้วน แล้วกด "ตรวจทานและบันทึกใบสมัคร" ด้านล่างสุดของฟอร์ม</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="formView">
+  <div class="banner">
+    หน้านี้เป็นแบบฟอร์มออนไลน์สำหรับกรอกใบสมัครด้วยตนเอง ระบบยังไม่ได้เชื่อมต่อฐานข้อมูลกลาง เมื่อกดปุ่ม "ตรวจทานและบันทึกใบสมัคร" ท่านจะได้หน้าสรุปสำหรับ<strong>บันทึกเป็น PDF / สั่งพิมพ์</strong> และ<strong>ดาวน์โหลดไฟล์ข้อมูล</strong> เพื่อส่งต่อให้ร้าน (ทาง LINE) — ก่อนเผยแพร่ลิงก์จริง อย่าลืมแก้ LINE ID ปลายทางในช่อง "LINE ID ฝ่ายบุคคล" ท้ายฟอร์มให้ตรงกับของร้าน
+  </div>
+
+  <form id="appForm">
+
+    <!-- Header info -->
+    <div class="card">
+      <h3><span class="step-num">•</span>ข้อมูลใบสมัคร</h3>
+      <div class="grid">
+        <div class="field-group">
+          <label class="lbl">วันที่สมัคร <span class="req">*</span></label>
+          <input type="date" name="app_date" required>
+        </div>
+        <div class="field-group">
+          <label class="lbl">สาขาที่สมัคร <span class="req">*</span></label>
+          <input type="text" name="branch" placeholder="เช่น บานาน่า พาร์ทเนอร์ ขอนแก่น สาขา..." required>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="lbl">รูปถ่าย (ขนาด 1–2 นิ้ว, ถ้ามี — ใช้แสดงในเอกสาร PDF ที่บันทึก)</label>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div class="photo-box" id="photoBox" onclick="document.getElementById('photoInput').click()">คลิกเพื่อ<br>อัปโหลดรูป</div>
+          <input type="file" id="photoInput" accept="image/*" style="display:none">
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. ตำแหน่งและความพร้อม -->
+    <div class="card">
+      <h3><span class="step-num">1</span>ตำแหน่งและความพร้อมในการทำงาน</h3>
+      <div class="grid">
+        <div class="field-group full">
+          <label class="lbl">ตำแหน่งที่สมัคร <span class="req">*</span></label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="position" value="พนักงานขายหน้าร้าน" required> พนักงานขายหน้าร้าน</label>
+            <label class="choice"><input type="radio" name="position" value="พนักงานขายออนไลน์"> พนักงานขายออนไลน์</label>
+            <label class="choice"><input type="radio" name="position" value="ทำได้ทั้งสองส่วน"> ทำได้ทั้งสองส่วน</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="lbl">วันที่พร้อมเริ่มงาน</label>
+          <input type="date" name="start_date">
+        </div>
+        <div class="field-group">
+          <label class="lbl">เงินเดือนที่คาดหวัง (บาท/เดือน)</label>
+          <input type="number" name="expected_salary" min="0" placeholder="เช่น 12000">
+        </div>
+        <div class="field-group">
+          <label class="lbl">รูปแบบงานที่ต้องการ</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="job_type" value="ประจำ"> ประจำ</label>
+            <label class="choice"><input type="radio" name="job_type" value="ทดลองงาน"> ทดลองงาน</label>
+            <label class="choice"><input type="radio" name="job_type" value="อื่นๆ"> อื่น ๆ</label>
+          </div>
+          <input type="text" name="job_type_other" placeholder="ระบุ (ถ้าเลือกอื่น ๆ)" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">มีรถ/พาหนะส่วนตัว</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="own_vehicle" value="มี"> มี</label>
+            <label class="choice"><input type="radio" name="own_vehicle" value="ไม่มี"> ไม่มี</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="lbl">ทำงานตามตารางร้าน วันหยุด และวันนักขัตฤกษ์ได้หรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="holiday_work" value="ได้"> ได้</label>
+            <label class="choice"><input type="radio" name="holiday_work" value="ไม่ได้"> ไม่ได้</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="lbl">ยืนขายสินค้า/ทำงานเป็นกะได้หรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="shift_work" value="ได้"> ได้</label>
+            <label class="choice"><input type="radio" name="shift_work" value="ไม่ได้"> ไม่ได้</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. ข้อมูลส่วนตัว -->
+    <div class="card">
+      <h3><span class="step-num">2</span>ข้อมูลส่วนตัว</h3>
+      <div class="grid">
+        <div class="field-group"><label class="lbl">ชื่อ–นามสกุล (ไทย) <span class="req">*</span></label><input type="text" name="full_name_th" required></div>
+        <div class="field-group"><label class="lbl">ชื่อเล่น</label><input type="text" name="nickname"></div>
+        <div class="field-group"><label class="lbl">Name–Surname (English)</label><input type="text" name="full_name_en"></div>
+        <div class="field-group">
+          <label class="lbl">เพศ</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="gender" value="ชาย"> ชาย</label>
+            <label class="choice"><input type="radio" name="gender" value="หญิง"> หญิง</label>
+            <label class="choice"><input type="radio" name="gender" value="ไม่ระบุ"> ไม่ระบุ</label>
+          </div>
+        </div>
+        <div class="field-group"><label class="lbl">วัน/เดือน/ปีเกิด</label><input type="date" name="dob"></div>
+        <div class="field-group"><label class="lbl">อายุ (ปี)</label><input type="number" name="age" min="0"></div>
+        <div class="field-group"><label class="lbl">เลขบัตรประชาชน</label><input type="text" name="id_card" maxlength="13" placeholder="13 หลัก"></div>
+        <div class="field-group"><label class="lbl">โทรศัพท์มือถือ <span class="req">*</span></label><input type="tel" name="phone" required></div>
+        <div class="field-group"><label class="lbl">LINE ID</label><input type="text" name="line_id"></div>
+        <div class="field-group"><label class="lbl">Facebook / TikTok / Instagram</label><input type="text" name="social"></div>
+        <div class="field-group"><label class="lbl">อีเมล</label><input type="email" name="email"></div>
+        <div class="field-group full"><label class="lbl">ที่อยู่ปัจจุบัน</label><input type="text" name="address"></div>
+        <div class="field-group"><label class="lbl">จังหวัด</label><input type="text" name="province"></div>
+        <div class="field-group"><label class="lbl">รหัสไปรษณีย์</label><input type="text" name="zipcode" maxlength="5"></div>
+        <div class="field-group"><label class="lbl">บุคคลติดต่อฉุกเฉิน</label><input type="text" name="emergency_name"></div>
+        <div class="field-group"><label class="lbl">ความสัมพันธ์</label><input type="text" name="emergency_relation"></div>
+        <div class="field-group"><label class="lbl">โทรศัพท์ (ผู้ติดต่อฉุกเฉิน)</label><input type="tel" name="emergency_phone"></div>
+      </div>
+    </div>
+
+    <!-- 3. การศึกษา -->
+    <div class="card">
+      <h3><span class="step-num">3</span>ข้อมูลการศึกษา</h3>
+      <div style="overflow-x:auto;">
+      <table class="mini" id="eduTable">
+        <thead><tr><th style="width:16%">ระดับการศึกษา</th><th>สถานศึกษา</th><th>สาขาวิชา</th><th style="width:12%">ปีที่จบ</th><th style="width:12%">เกรดเฉลี่ย</th></tr></thead>
+        <tbody>
+          <tr><td><b>มัธยม/ปวช.</b></td><td><input type="text" name="edu1_school"></td><td><input type="text" name="edu1_major"></td><td><input type="text" name="edu1_year"></td><td><input type="text" name="edu1_gpa"></td></tr>
+          <tr><td><b>ปวส./อนุปริญญา</b></td><td><input type="text" name="edu2_school"></td><td><input type="text" name="edu2_major"></td><td><input type="text" name="edu2_year"></td><td><input type="text" name="edu2_gpa"></td></tr>
+          <tr><td><b>ปริญญาตรี/อื่น ๆ</b></td><td><input type="text" name="edu3_school"></td><td><input type="text" name="edu3_major"></td><td><input type="text" name="edu3_year"></td><td><input type="text" name="edu3_gpa"></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- 4. ประวัติการทำงาน -->
+    <div class="card">
+      <h3><span class="step-num">4</span>ประวัติการทำงาน (เรียงจากงานล่าสุด)</h3>
+      <div style="overflow-x:auto;">
+      <table class="mini" id="workTable">
+        <thead><tr><th>บริษัท/ร้าน</th><th>ตำแหน่ง</th><th>ระยะเวลา</th><th>เงินเดือนล่าสุด</th><th>หน้าที่/ผลงานเด่น</th><th>เหตุผลที่ออก</th></tr></thead>
+        <tbody id="workBody"></tbody>
+      </table>
+      </div>
+      <div class="row-actions"><button type="button" class="btn btn-ghost btn-sm" onclick="addWorkRow()">+ เพิ่มแถวประวัติการทำงาน</button></div>
+      <div class="grid" style="margin-top:14px;">
+        <div class="field-group"><label class="lbl">ยอดขายสูงสุดที่เคยทำได้ (บาท/เดือน)</label><input type="text" name="best_sales"></div>
+        <div class="field-group"><label class="lbl">สินค้าที่ถนัดขาย</label><input type="text" name="best_product"></div>
+      </div>
+    </div>
+
+    <!-- 5. ทักษะการขาย -->
+    <div class="card">
+      <h3><span class="step-num">5</span>ทักษะการขายและการใช้งานระบบ</h3>
+      <p class="hint">ให้คะแนนระดับความสามารถของตนเอง: 0 = ไม่เคยใช้ &nbsp;|&nbsp; 1 = พื้นฐาน &nbsp;|&nbsp; 2 = ทำงานได้ &nbsp;|&nbsp; 3 = ชำนาญ</p>
+      <div style="overflow-x:auto;">
+      <table class="mini" id="skillTable">
+        <thead><tr><th style="width:32%">ทักษะ</th><th style="width:12%">ระดับ 0–3</th><th>ตัวอย่างประสบการณ์/ผลงาน</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- 6. คำถามคัดกรอง -->
+    <div class="card">
+      <h3><span class="step-num">6</span>คำถามคัดกรองงานขาย</h3>
+      <div class="field-group full"><label class="lbl">1) เพราะอะไรจึงสนใจงานขายมือถือและสินค้าไอทีของบานาน่า ขอนแก่น?</label><textarea name="q1"></textarea></div>
+      <div class="field-group full"><label class="lbl">2) เมื่อลูกค้าบอกว่า "ร้านอื่นถูกกว่า" คุณจะตอบและปิดการขายอย่างไร?</label><textarea name="q2"></textarea></div>
+      <div class="field-group full"><label class="lbl">3) หากมีลูกค้าทักแชตพร้อมกันหลายราย คุณจะจัดลำดับและติดตามอย่างไรไม่ให้ลูกค้าหลุด?</label><textarea name="q3"></textarea></div>
+      <div class="field-group full"><label class="lbl">4) ยกตัวอย่างสินค้าหรือบริการที่คุณเคยขายได้ดี พร้อมวิธีที่ใช้ปิดการขาย</label><textarea name="q4"></textarea></div>
+      <div class="field-group full"><label class="lbl">5) เป้าหมายรายได้และยอดขายต่อเดือนที่คุณต้องการคือเท่าไร เพราะอะไร?</label><textarea name="q5"></textarea></div>
+    </div>
+
+    <!-- 7. ข้อมูลเพิ่มเติม -->
+    <div class="card">
+      <h3><span class="step-num">7</span>ข้อมูลเพิ่มเติม</h3>
+      <div class="grid">
+        <div class="field-group">
+          <label class="lbl">เคยมีประสบการณ์เกี่ยวกับมือถือ/ไอทีหรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="it_exp" value="มี"> มี</label>
+            <label class="choice"><input type="radio" name="it_exp" value="ไม่มี"> ไม่มี</label>
+          </div>
+          <input type="text" name="it_exp_detail" placeholder="หากมี ระบุแบรนด์/สินค้า" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">สามารถเดินทางไปอบรมหรือช่วยงานต่างสาขา</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="travel_ok" value="ได้"> ได้</label>
+            <label class="choice"><input type="radio" name="travel_ok" value="ไม่ได้"> ไม่ได้</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="lbl">สามารถทำงานล่วงเวลาเมื่อจำเป็น</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="travel_ok" style="display:none;"><input type="radio" name="ot_ok" value="ได้"> ได้</label>
+            <label class="choice"><input type="radio" name="ot_ok" value="ไม่ได้"> ไม่ได้</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="lbl">มีข้อจำกัดด้านเวลาหรือวันทำงานหรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="time_limit" value="ไม่มี"> ไม่มี</label>
+            <label class="choice"><input type="radio" name="time_limit" value="มี"> มี</label>
+          </div>
+          <input type="text" name="time_limit_detail" placeholder="ระบุ (ถ้ามี)" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">มีภาระผูกพันกับงานเดิมหรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="prior_job_bond" value="ไม่มี"> ไม่มี</label>
+            <label class="choice"><input type="radio" name="prior_job_bond" value="มี"> มี</label>
+          </div>
+          <input type="text" name="prior_job_bond_date" placeholder="ถึงวันที่ (ถ้ามี)" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">เคยถูกเลิกจ้างหรือให้ออกจากงานหรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="terminated" value="ไม่เคย"> ไม่เคย</label>
+            <label class="choice"><input type="radio" name="terminated" value="เคย"> เคย</label>
+          </div>
+          <input type="text" name="terminated_detail" placeholder="ระบุ (ถ้าเคย)" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">มีคดีความ/ประวัติที่กระทบงานหรือไม่</label>
+          <div class="choice-row">
+            <label class="choice"><input type="radio" name="legal_issue" value="ไม่มี"> ไม่มี</label>
+            <label class="choice"><input type="radio" name="legal_issue" value="มี"> มี</label>
+          </div>
+          <input type="text" name="legal_issue_detail" placeholder="ระบุ (ถ้ามี)" style="margin-top:6px;">
+        </div>
+        <div class="field-group">
+          <label class="lbl">ทราบข่าวรับสมัครจาก</label>
+          <div class="choice-row">
+            <label class="choice"><input type="checkbox" name="source_fb" value="Facebook"> Facebook</label>
+            <label class="choice"><input type="checkbox" name="source_tiktok" value="TikTok"> TikTok</label>
+            <label class="choice"><input type="checkbox" name="source_ref" value="คนแนะนำ"> คนแนะนำ</label>
+            <label class="choice"><input type="checkbox" name="source_store" value="หน้าร้าน"> หน้าร้าน</label>
+          </div>
+          <input type="text" name="source_other" placeholder="อื่น ๆ ระบุ" style="margin-top:6px;">
+        </div>
+        <div class="field-group"><label class="lbl">ผู้แนะนำ (ถ้ามี)</label><input type="text" name="referrer"></div>
+      </div>
+    </div>
+
+    <!-- 8. บุคคลอ้างอิง -->
+    <div class="card">
+      <h3><span class="step-num">8</span>บุคคลอ้างอิง</h3>
+      <div style="overflow-x:auto;">
+      <table class="mini">
+        <thead><tr><th>ชื่อ–นามสกุล</th><th>ความสัมพันธ์/ตำแหน่ง</th><th>บริษัท/สถานที่ทำงาน</th><th>โทรศัพท์</th></tr></thead>
+        <tbody>
+          <tr><td><input type="text" name="ref1_name"></td><td><input type="text" name="ref1_relation"></td><td><input type="text" name="ref1_company"></td><td><input type="tel" name="ref1_phone"></td></tr>
+          <tr><td><input type="text" name="ref2_name"></td><td><input type="text" name="ref2_relation"></td><td><input type="text" name="ref2_company"></td><td><input type="tel" name="ref2_phone"></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- 9. เอกสารประกอบ -->
+    <div class="card">
+      <h3><span class="step-num">9</span>เอกสารประกอบการสมัคร</h3>
+      <p class="hint">ทำเครื่องหมายเอกสารที่ท่านเตรียมไว้ (นำมายื่นวันสัมภาษณ์ หรือแนบไฟล์เมื่อร้านติดต่อกลับ)</p>
+      <div class="choice-row">
+        <label class="choice"><input type="checkbox" name="doc_id"> สำเนาบัตรประชาชน</label>
+        <label class="choice"><input type="checkbox" name="doc_house"> สำเนาทะเบียนบ้าน</label>
+        <label class="choice"><input type="checkbox" name="doc_edu"> สำเนาวุฒิการศึกษา</label>
+        <label class="choice"><input type="checkbox" name="doc_photo"> รูปถ่าย</label>
+        <label class="choice"><input type="checkbox" name="doc_work_cert"> หนังสือรับรองการทำงาน/ผลงาน</label>
+      </div>
+      <input type="text" name="doc_other" placeholder="อื่น ๆ ระบุ" style="margin-top:10px;">
+    </div>
+
+    <!-- 10. คำรับรอง -->
+    <div class="card">
+      <h3><span class="step-num">10</span>คำรับรองและความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล</h3>
+      <div class="consent-box">
+        ข้าพเจ้ารับรองว่าข้อมูลและเอกสารที่ให้ไว้ในใบสมัครนี้เป็นความจริงทุกประการ หากตรวจพบภายหลังว่าเป็นเท็จหรือปกปิดข้อเท็จจริง บริษัทมีสิทธิยุติกระบวนการรับสมัครหรือการจ้างงานได้ ข้าพเจ้ายินยอมให้บริษัทเก็บ ใช้ ตรวจสอบ และเปิดเผยข้อมูลส่วนบุคคลเท่าที่จำเป็นเพื่อการสรรหา ตรวจสอบประวัติ ติดต่อบุคคลอ้างอิง และดำเนินการด้านการจ้างงานตามกฎหมายและนโยบายของบริษัท
+      </div>
+      <div class="field-group" style="margin-top:12px;">
+        <label class="choice"><input type="checkbox" id="consentCheck" required> <b>ข้าพเจ้าได้อ่านและยินยอมตามข้อความข้างต้น <span class="req">*</span></b></label>
+      </div>
+      <div class="sig-row">
+        <div class="field-group"><label class="lbl">ลงชื่อผู้สมัคร (พิมพ์ชื่อ–นามสกุลแทนลายเซ็น) <span class="req">*</span></label><input type="text" name="signature" required></div>
+        <div class="field-group"><label class="lbl">วันที่ลงนาม</label><input type="date" name="signature_date"></div>
+      </div>
+    </div>
+
+    <div class="card no-print">
+      <h3><span class="step-num">💬</span>LINE ID ฝ่ายบุคคล (สำหรับผู้ดูแลฟอร์ม)</h3>
+      <p class="hint">แก้ไข LINE ID นี้ให้เป็น ID จริงของร้านก่อนเผยแพร่ลิงก์ให้ผู้สมัคร ระบบจะใช้อันนี้เปิดแอป LINE ทักแชตอัตโนมัติ</p>
+      <input type="text" id="hrLineId" value="@dditcom">
+    </div>
+
+  </form>
+
+  <div class="submit-bar">
+    <button type="button" class="btn btn-navy" onclick="reviewForm()">✓ ตรวจทานและบันทึกใบสมัคร</button>
+  </div>
+  <div class="footer-note">แบบฟอร์มนี้ทำงานทั้งหมดในเบราว์เซอร์ของท่าน ไม่มีการส่งข้อมูลไปยังเซิร์ฟเวอร์ภายนอกโดยอัตโนมัติ</div>
+</div>
+
+<!-- Summary / printable view -->
+<div class="wrap" id="summaryView">
+  <div id="summaryContent"></div>
+  <div class="submit-bar no-print">
+    <button type="button" class="btn btn-ghost" onclick="backToForm()">← กลับไปแก้ไขข้อมูล</button>
+    <button type="button" class="btn btn-gold" onclick="window.print()">🖨 พิมพ์ / บันทึกเป็น PDF</button>
+    <button type="button" class="btn btn-navy" onclick="downloadData()">⬇ ดาวน์โหลดไฟล์ข้อมูล (.txt)</button>
+    <button type="button" class="btn btn-line" onclick="sendToLineHR()">💬 เปิด LINE แจ้งฝ่ายบุคคล</button>
+  </div>
+</div>
+
+<script>
+const skills = [
+  ["ขายมือถือ iPhone / Android / Tablet / Notebook","skill1"],
+  ["ขายอุปกรณ์เสริม ประกันสินค้า และบริการหลังการขาย","skill2"],
+  ["แนะนำสเปกสินค้า เปรียบเทียบรุ่น และตอบข้อโต้แย้งลูกค้า","skill3"],
+  ["ปิดการขายหน้าร้าน / Upsell / Cross-sell","skill4"],
+  ["ตอบแชต Facebook / LINE OA / TikTok / Marketplace","skill5"],
+  ["ทำใบเสนอราคา รับออเดอร์ และติดตามลูกค้า","skill6"],
+  ["Live สดขายสินค้า / พูดหน้ากล้อง / รีวิวสินค้า","skill7"],
+  ["ถ่ายภาพสินค้า ทำคลิปสั้นด้วย CapCut / Canva","skill8"],
+  ["ใช้ POS / ระบบสต๊อก / เช็กสินค้า / รับชำระเงิน","skill9"],
+  ["ใช้ Excel / Google Sheets / ทำรายงานยอดขาย","skill10"],
+  ["จัดหน้าร้าน เติมสินค้า ตรวจราคา และดูแลความเรียบร้อย","skill11"],
+  ["รับเรื่องเคลม ประสานงานซ่อม และดูแลลูกค้าหลังการขาย","skill12"],
+];
+const skillBody = document.querySelector("#skillTable tbody");
+skills.forEach(([label,key])=>{
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td>${label}</td>
+    <td><select name="${key}_score"><option value="">-</option><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></td>
+    <td><input type="text" name="${key}_note"></td>`;
+  skillBody.appendChild(tr);
+});
+
+let workRowCount = 0;
+function addWorkRow(){
+  workRowCount++;
+  const tr = document.createElement("tr");
+  tr.innerHTML = `<td><input type="text" name="work${workRowCount}_company"></td>
+    <td><input type="text" name="work${workRowCount}_position"></td>
+    <td><input type="text" name="work${workRowCount}_duration"></td>
+    <td><input type="text" name="work${workRowCount}_salary"></td>
+    <td><input type="text" name="work${workRowCount}_duties"></td>
+    <td><input type="text" name="work${workRowCount}_reason"></td>`;
+  document.getElementById("workBody").appendChild(tr);
+}
+for(let i=0;i<3;i++) addWorkRow();
+
+let photoDataUrl = "";
+document.getElementById("photoInput").addEventListener("change", function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    photoDataUrl = ev.target.result;
+    document.getElementById("photoBox").innerHTML = `<img src="${photoDataUrl}">`;
+  };
+  reader.readAsDataURL(file);
+});
+
+function val(name){
+  const els = document.getElementsByName(name);
+  if(!els.length) return "";
+  if(els[0].type === "radio"){
+    for(const el of els) if(el.checked) return el.value;
+    return "";
+  }
+  if(els[0].type === "checkbox"){
+    return els[0].checked ? (els[0].value || "✓") : "";
+  }
+  return els[0].value || "";
+}
+function line(label, name){
+  const v = val(name);
+  return `<div class="kv"><b>${label}</b><span>${v || "-"}</span></div>`;
+}
+
+function reviewForm(){
+  const form = document.getElementById("appForm");
+  if(!form.reportValidity()) return;
+  if(!document.getElementById("consentCheck").checked){
+    alert("กรุณายืนยันความยินยอมในข้อ 10 ก่อนบันทึกใบสมัคร");
+    return;
+  }
+
+  let sourceList = [];
+  ["source_fb","source_tiktok","source_ref","source_store"].forEach(k=>{ if(val(k)) sourceList.push(val(k)); });
+  if(val("source_other")) sourceList.push(val("source_other"));
+
+  let docList = [];
+  [["doc_id","สำเนาบัตรประชาชน"],["doc_house","สำเนาทะเบียนบ้าน"],["doc_edu","สำเนาวุฒิการศึกษา"],["doc_photo","รูปถ่าย"],["doc_work_cert","หนังสือรับรองการทำงาน/ผลงาน"]].forEach(([k,l])=>{
+    if(document.getElementsByName(k)[0].checked) docList.push(l);
+  });
+  if(val("doc_other")) docList.push(val("doc_other"));
+
+  let eduRows = "";
+  [["edu1","มัธยม/ปวช."],["edu2","ปวส./อนุปริญญา"],["edu3","ปริญญาตรี/อื่น ๆ"]].forEach(([k,label])=>{
+    const school = val(k+"_school"), major = val(k+"_major"), year = val(k+"_year"), gpa = val(k+"_gpa");
+    if(school||major||year||gpa){
+      eduRows += `<div class="kv"><b>${label}</b><span>${school||"-"} | สาขา ${major||"-"} | ปีที่จบ ${year||"-"} | เกรด ${gpa||"-"}</span></div>`;
+    }
+  });
+
+  let workRows = "";
+  for(let i=1;i<=workRowCount;i++){
+    const c = val(`work${i}_company`);
+    if(!c) continue;
+    workRows += `<div class="kv"><b>${c}</b><span>ตำแหน่ง ${val('work'+i+'_position')||'-'} | ระยะเวลา ${val('work'+i+'_duration')||'-'} | เงินเดือน ${val('work'+i+'_salary')||'-'} | หน้าที่ ${val('work'+i+'_duties')||'-'} | เหตุผลที่ออก ${val('work'+i+'_reason')||'-'}</span></div>`;
+  }
+  if(!workRows) workRows = `<div class="kv"><span>ไม่ได้กรอกประวัติการทำงาน</span></div>`;
+
+  let skillRows = "";
+  skills.forEach(([label,key])=>{
+    const score = val(key+"_score"), note = val(key+"_note");
+    if(score || note) skillRows += `<div class="kv"><b>${label}</b><span>ระดับ ${score||"-"}/3 ${note?(" — "+note):""}</span></div>`;
+  });
+  if(!skillRows) skillRows = `<div class="kv"><span>ไม่ได้ประเมินทักษะ</span></div>`;
+
+  let refRows = "";
+  [1,2].forEach(i=>{
+    const n = val(`ref${i}_name`);
+    if(n) refRows += `<div class="kv"><b>${n}</b><span>${val('ref'+i+'_relation')||'-'} | ${val('ref'+i+'_company')||'-'} | โทร ${val('ref'+i+'_phone')||'-'}</span></div>`;
+  });
+  if(!refRows) refRows = `<div class="kv"><span>ไม่ได้ระบุบุคคลอ้างอิง</span></div>`;
+
+  const photoHtml = photoDataUrl ? `<img src="${photoDataUrl}" style="width:100px;border-radius:8px;border:1px solid #ccc;float:right;">` : "";
+
+  document.getElementById("summaryContent").innerHTML = `
+    ${photoHtml}
+    <h1>ใบสมัครงาน — พนักงานขายหน้าร้านและออนไลน์<br><span style="font-size:14px;color:#5A6672;font-weight:500;">BANANA PARTNER KHON KAEN</span></h1>
+    <div class="sec"><h4>ข้อมูลใบสมัคร</h4>
+      ${line("วันที่สมัคร","app_date")}${line("สาขาที่สมัคร","branch")}
+    </div>
+    <div class="sec"><h4>1. ตำแหน่งและความพร้อมในการทำงาน</h4>
+      ${line("ตำแหน่งที่สมัคร","position")}${line("วันที่พร้อมเริ่มงาน","start_date")}${line("เงินเดือนที่คาดหวัง","expected_salary")}
+      ${line("รูปแบบงาน","job_type")}${line("มีพาหนะส่วนตัว","own_vehicle")}${line("ทำงานวันหยุด/นักขัตฤกษ์ได้","holiday_work")}${line("ยืนขาย/ทำงานเป็นกะได้","shift_work")}
+    </div>
+    <div class="sec"><h4>2. ข้อมูลส่วนตัว</h4>
+      ${line("ชื่อ-นามสกุล (ไทย)","full_name_th")}${line("ชื่อเล่น","nickname")}${line("Name (English)","full_name_en")}${line("เพศ","gender")}
+      ${line("วันเกิด","dob")}${line("อายุ","age")}${line("เลขบัตรประชาชน","id_card")}${line("โทรศัพท์","phone")}
+      ${line("LINE ID","line_id")}${line("Social","social")}${line("อีเมล","email")}${line("ที่อยู่","address")}
+      ${line("จังหวัด","province")}${line("รหัสไปรษณีย์","zipcode")}
+      ${line("ผู้ติดต่อฉุกเฉิน","emergency_name")}${line("ความสัมพันธ์","emergency_relation")}${line("โทรศัพท์ฉุกเฉิน","emergency_phone")}
+    </div>
+    <div class="sec"><h4>3. ข้อมูลการศึกษา</h4>${eduRows}</div>
+    <div class="sec"><h4>4. ประวัติการทำงาน</h4>${workRows}
+      ${line("ยอดขายสูงสุดที่เคยทำได้","best_sales")}${line("สินค้าที่ถนัดขาย","best_product")}
+    </div>
+    <div class="sec"><h4>5. ทักษะการขายและการใช้งานระบบ</h4>${skillRows}</div>
+    <div class="sec"><h4>6. คำถามคัดกรองงานขาย</h4>
+      <div class="kv"><b>1) เหตุผลที่สนใจ</b><span>${val("q1")||"-"}</span></div>
+      <div class="kv"><b>2) ตอบเรื่องราคา</b><span>${val("q2")||"-"}</span></div>
+      <div class="kv"><b>3) จัดการแชตหลายราย</b><span>${val("q3")||"-"}</span></div>
+      <div class="kv"><b>4) ตัวอย่างปิดการขาย</b><span>${val("q4")||"-"}</span></div>
+      <div class="kv"><b>5) เป้าหมายรายได้</b><span>${val("q5")||"-"}</span></div>
+    </div>
+    <div class="sec"><h4>7. ข้อมูลเพิ่มเติม</h4>
+      ${line("ประสบการณ์มือถือ/ไอที","it_exp")}${line("รายละเอียด","it_exp_detail")}
+      ${line("เดินทางไปอบรม/ต่างสาขาได้","travel_ok")}${line("ทำ OT ได้","ot_ok")}
+      ${line("ข้อจำกัดเวลา","time_limit")}${line("รายละเอียดข้อจำกัด","time_limit_detail")}
+      ${line("ภาระผูกพันงานเดิม","prior_job_bond")}${line("ถึงวันที่","prior_job_bond_date")}
+      ${line("เคยถูกเลิกจ้าง","terminated")}${line("รายละเอียด","terminated_detail")}
+      ${line("คดีความ/ประวัติกระทบงาน","legal_issue")}${line("รายละเอียด","legal_issue_detail")}
+      <div class="kv"><b>ทราบข่าวจาก</b><span>${sourceList.join(", ")||"-"}</span></div>
+      ${line("ผู้แนะนำ","referrer")}
+    </div>
+    <div class="sec"><h4>8. บุคคลอ้างอิง</h4>${refRows}</div>
+    <div class="sec"><h4>9. เอกสารประกอบการสมัคร</h4><div class="kv"><span>${docList.join(", ")||"ไม่ได้ระบุ"}</span></div></div>
+    <div class="sec"><h4>10. คำรับรองและลายเซ็น</h4>
+      <div class="kv"><b>ยินยอมตามเงื่อนไข</b><span>${document.getElementById("consentCheck").checked ? "ยินยอม" : "-"}</span></div>
+      ${line("ลงชื่อผู้สมัคร","signature")}${line("วันที่ลงนาม","signature_date")}
+    </div>
+  `;
+
+  document.getElementById("formView").style.display = "none";
+  document.getElementById("summaryView").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function backToForm(){
+  document.getElementById("summaryView").style.display = "none";
+  document.getElementById("formView").style.display = "block";
+  window.scrollTo(0,0);
+}
+
+function buildPlainText(){
+  const div = document.createElement("div");
+  div.innerHTML = document.getElementById("summaryContent").innerHTML;
+  return div.innerText.replace(/\n{3,}/g,"\n\n");
+}
+
+function downloadData(){
+  const text = buildPlainText();
+  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const name = val("full_name_th") || "ผู้สมัคร";
+  a.href = url; a.download = `ใบสมัคร_${name}.txt`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function sendToLineHR(){
+  const rawLineId = document.getElementById("hrLineId").value.trim();
+  const cleanLineId = rawLineId.replace('@', '');
+  const lineUrl = `https://line.me/R/ti/p/~${cleanLineId}`;
+  
+  alert("ระบบจะนำคุณไปที่แอป LINE เพื่อเปิดหน้าโปรไฟล์ฝ่ายบุคคล\n\nเมื่อเปิดแอปแล้ว ให้กดปุ่ม 'แชต' และส่งไฟล์ข้อมูลหรือใบสมัคร PDF ที่บันทึกไว้ได้เลยครับ");
+  window.location.href = lineUrl;
+}
+</script>
+</body>
+</html>
