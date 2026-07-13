@@ -62,6 +62,7 @@
   input[type=text], input[type=tel], input[type=email], input[type=date], input[type=number], textarea, select{
     width:100%; padding:9px 11px; border:1px solid var(--line); border-radius:8px;
     font-family:inherit; font-size:14.5px; background:#fcfdfe;
+    -webkit-appearance: none; /* ลบสไตล์ดั้งเดิมของ iOS */
   }
   input:focus, textarea:focus, select:focus{outline:2px solid var(--blue); outline-offset:1px; border-color:var(--blue);}
   textarea{resize:vertical; min-height:56px;}
@@ -76,10 +77,17 @@
   table.mini td{border:1px solid var(--line); padding:5px; vertical-align:top;}
   table.mini td input, table.mini td select{border:1px solid transparent; background:transparent; padding:6px 5px;}
   table.mini td input:focus, table.mini td select:focus{background:#fff; border-color:var(--blue);}
+  
   .row-actions{margin-top:8px;}
+  
+  /* ================= ดีไซน์ปุ่มกดใหม่ทั้งหมดเพื่อรองรับมือถือ ================= */
   .btn{
-    display:inline-flex; align-items:center; gap:6px; border:none; border-radius:9px;
-    padding:10px 18px; font-size:14.5px; font-weight:700; cursor:pointer; font-family:inherit;
+    display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:10px;
+    padding:12px 22px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+    transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.08); -webkit-tap-highlight-color: transparent;
+  }
+  .btn:active {
+    transform: scale(0.96); /* เอฟเฟกต์ยุบตัวเมื่อใช้นิ้วกด */
   }
   .btn-ghost{background:#fff; border:1px solid var(--blue); color:var(--blue);}
   .btn-ghost:hover{background:var(--light-blue);}
@@ -89,7 +97,27 @@
   .btn-navy:hover{background:#111a24;}
   .btn-line{background:var(--line-green); color:#fff;}
   .btn-line:hover{background:var(--line-green-dark);}
-  .btn-sm{padding:6px 12px; font-size:13px;}
+  .btn-sm{padding:8px 14px; font-size:13.5px; border-radius:8px;}
+  
+  /* สไตล์แถบ Sticky ท้ายหน้าจอมือถือ */
+  .submit-bar{
+    position:sticky; bottom:0; background:#fff; border-top:1px solid var(--line);
+    padding:14px 16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; z-index:99;
+    box-shadow:0 -4px 12px rgba(0,0,0,0.08);
+  }
+  /* ขยายขนาดปุ่มในแถบส่งข้อมูลบนอุปกรณ์พกพาให้กดง่ายเต็มตา */
+  @media (max-width:640px){
+    .submit-bar .btn {
+      flex: 1 1 calc(50% - 6px); /* ให้ปุ่มแบ่งครึ่งจอเท่าๆ กันอย่างสวยงาม */
+      padding: 14px 10px;
+      font-size: 14px;
+    }
+    .submit-bar .btn:only-child {
+      flex: 1 1 100%;
+    }
+  }
+  /* ================================================================= */
+  
   .photo-box{
     width:110px; height:140px; border:2px dashed var(--line); border-radius:10px;
     display:flex; align-items:center; justify-content:center; text-align:center;
@@ -102,11 +130,7 @@
     font-size:13.5px; color:#2a3240; line-height:1.7;
   }
   .sig-row{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:14px;}
-  .submit-bar{
-    position:sticky; bottom:0; background:#fff; border-top:1px solid var(--line);
-    padding:14px 16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; z-index:5;
-    box-shadow:0 -2px 10px rgba(0,0,0,.05);
-  }
+  
   .footer-note{max-width:900px;margin:0 auto 40px;padding:0 16px;color:var(--gray);font-size:12.5px;text-align:center;}
   #summaryView{display:none;}
   #summaryView h1{color:var(--navy); font-size:20px; border-bottom:3px solid var(--gold); padding-bottom:8px;}
@@ -122,6 +146,8 @@
     .grid, .grid.g3{grid-template-columns:1fr;}
     .sig-row{grid-template-columns:1fr;}
     table.mini{font-size:12.5px;}
+    #summaryView .kv{grid-template-columns:1fr;}
+    #summaryView .kv b{margin-top:4px;}
   }
   @media print{
     .topbar, .submit-bar, .footer-note, #formView, .no-print{display:none !important;}
@@ -152,7 +178,6 @@
 
   <form id="appForm">
 
-    <!-- Header info -->
     <div class="card">
       <h3><span class="step-num">•</span>ข้อมูลใบสมัคร</h3>
       <div class="grid">
@@ -174,7 +199,6 @@
       </div>
     </div>
 
-    <!-- 1. ตำแหน่งและความพร้อม -->
     <div class="card">
       <h3><span class="step-num">1</span>ตำแหน่งและความพร้อมในการทำงาน</h3>
       <div class="grid">
@@ -227,7 +251,6 @@
       </div>
     </div>
 
-    <!-- 2. ข้อมูลส่วนตัว -->
     <div class="card">
       <h3><span class="step-num">2</span>ข้อมูลส่วนตัว</h3>
       <div class="grid">
@@ -258,7 +281,6 @@
       </div>
     </div>
 
-    <!-- 3. การศึกษา -->
     <div class="card">
       <h3><span class="step-num">3</span>ข้อมูลการศึกษา</h3>
       <div style="overflow-x:auto;">
@@ -273,7 +295,6 @@
       </div>
     </div>
 
-    <!-- 4. ประวัติการทำงาน -->
     <div class="card">
       <h3><span class="step-num">4</span>ประวัติการทำงาน (เรียงจากงานล่าสุด)</h3>
       <div style="overflow-x:auto;">
@@ -282,14 +303,13 @@
         <tbody id="workBody"></tbody>
       </table>
       </div>
-      <div class="row-actions"><button type="button" class="btn btn-ghost btn-sm" onclick="addWorkRow()">+ เพิ่มแถวประวัติการทำงาน</button></div>
+      <div class="row-actions"><button type="button" class="btn btn-ghost btn-sm" onclick="addWorkRow()">➕ เพิ่มแถวประวัติการทำงาน</button></div>
       <div class="grid" style="margin-top:14px;">
         <div class="field-group"><label class="lbl">ยอดขายสูงสุดที่เคยทำได้ (บาท/เดือน)</label><input type="text" name="best_sales"></div>
         <div class="field-group"><label class="lbl">สินค้าที่ถนัดขาย</label><input type="text" name="best_product"></div>
       </div>
     </div>
 
-    <!-- 5. ทักษะการขาย -->
     <div class="card">
       <h3><span class="step-num">5</span>ทักษะการขายและการใช้งานระบบ</h3>
       <p class="hint">ให้คะแนนระดับความสามารถของตนเอง: 0 = ไม่เคยใช้ &nbsp;|&nbsp; 1 = พื้นฐาน &nbsp;|&nbsp; 2 = ทำงานได้ &nbsp;|&nbsp; 3 = ชำนาญ</p>
@@ -301,7 +321,6 @@
       </div>
     </div>
 
-    <!-- 6. คำถามคัดกรอง -->
     <div class="card">
       <h3><span class="step-num">6</span>คำถามคัดกรองงานขาย</h3>
       <div class="field-group full"><label class="lbl">1) เพราะอะไรจึงสนใจงานขายมือถือและสินค้าไอทีของบานาน่า ขอนแก่น?</label><textarea name="q1"></textarea></div>
@@ -311,7 +330,6 @@
       <div class="field-group full"><label class="lbl">5) เป้าหมายรายได้และยอดขายต่อเดือนที่คุณต้องการคือเท่าไร เพราะอะไร?</label><textarea name="q5"></textarea></div>
     </div>
 
-    <!-- 7. ข้อมูลเพิ่มเติม -->
     <div class="card">
       <h3><span class="step-num">7</span>ข้อมูลเพิ่มเติม</h3>
       <div class="grid">
@@ -333,7 +351,7 @@
         <div class="field-group">
           <label class="lbl">สามารถทำงานล่วงเวลาเมื่อจำเป็น</label>
           <div class="choice-row">
-            <label class="choice"><input type="radio" name="travel_ok" style="display:none;"><input type="radio" name="ot_ok" value="ได้"> ได้</label>
+            <label class="choice"><input type="radio" name="ot_ok" value="ได้"> ได้</label>
             <label class="choice"><input type="radio" name="ot_ok" value="ไม่ได้"> ไม่ได้</label>
           </div>
         </div>
@@ -383,7 +401,6 @@
       </div>
     </div>
 
-    <!-- 8. บุคคลอ้างอิง -->
     <div class="card">
       <h3><span class="step-num">8</span>บุคคลอ้างอิง</h3>
       <div style="overflow-x:auto;">
@@ -397,7 +414,6 @@
       </div>
     </div>
 
-    <!-- 9. เอกสารประกอบ -->
     <div class="card">
       <h3><span class="step-num">9</span>เอกสารประกอบการสมัคร</h3>
       <p class="hint">ทำเครื่องหมายเอกสารที่ท่านเตรียมไว้ (นำมายื่นวันสัมภาษณ์ หรือแนบไฟล์เมื่อร้านติดต่อกลับ)</p>
@@ -411,7 +427,6 @@
       <input type="text" name="doc_other" placeholder="อื่น ๆ ระบุ" style="margin-top:10px;">
     </div>
 
-    <!-- 10. คำรับรอง -->
     <div class="card">
       <h3><span class="step-num">10</span>คำรับรองและความยินยอมเกี่ยวกับข้อมูลส่วนบุคคล</h3>
       <div class="consent-box">
@@ -440,14 +455,13 @@
   <div class="footer-note">แบบฟอร์มนี้ทำงานทั้งหมดในเบราว์เซอร์ของท่าน ไม่มีการส่งข้อมูลไปยังเซิร์ฟเวอร์ภายนอกโดยอัตโนมัติ</div>
 </div>
 
-<!-- Summary / printable view -->
 <div class="wrap" id="summaryView">
   <div id="summaryContent"></div>
   <div class="submit-bar no-print">
-    <button type="button" class="btn btn-ghost" onclick="backToForm()">← กลับไปแก้ไขข้อมูล</button>
-    <button type="button" class="btn btn-gold" onclick="window.print()">🖨 พิมพ์ / บันทึกเป็น PDF</button>
-    <button type="button" class="btn btn-navy" onclick="downloadData()">⬇ ดาวน์โหลดไฟล์ข้อมูล (.txt)</button>
-    <button type="button" class="btn btn-line" onclick="sendToLineHR()">💬 เปิด LINE แจ้งฝ่ายบุคคล</button>
+    <button type="button" class="btn btn-ghost" onclick="backToForm()">← แก้ไขข้อมูล</button>
+    <button type="button" class="btn btn-gold" onclick="window.print()">🖨 บันทึก PDF</button>
+    <button type="button" class="btn btn-navy" onclick="downloadData()">⬇ โหลดไฟล์ .txt</button>
+    <button type="button" class="btn btn-line" onclick="sendToLineHR()">💬 ส่ง LINE</button>
   </div>
 </div>
 
