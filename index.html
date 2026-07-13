@@ -71,12 +71,34 @@
     transition: all 0.2s ease; -webkit-appearance: none;
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
   }
+  
+  /* ตกแต่งช่องวันที่ให้แสดงผลชัดเจน สื่อสารความหมายได้ดีบนมือถือ */
+  input[type=date] {
+    position: relative;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E") no-repeat right 14px center;
+    background-size: 18px;
+    padding-right: 40px;
+  }
+  /* เปิดไอคอนปฏิทินดั้งเดิมของแต่ละระบบให้กดง่ายขึ้น */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    width: auto; height: auto; color: transparent; background: transparent;
+    cursor: pointer;
+  }
+
   input:focus, textarea:focus, select:focus{outline:none; border-color:var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); background: #fff;}
   textarea{resize:vertical; min-height:80px;}
   
   .choice-row{display:flex; flex-wrap:wrap; gap:12px 24px; padding: 6px 0;}
   .choice{display:inline-flex; align-items:center; gap:8px; font-size:14.5px; cursor:pointer; color: #334155; font-weight: 500;}
   .choice input{accent-color:var(--blue); width:18px; height:18px; cursor:pointer;}
+  
+  /* สร้างคลาสสำหรับเน้นขอบสีแดงเมื่อลืมกรอกข้อมูลชิ้นนั้น */
+  .field-error {
+    border-color: var(--err) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+    background-color: #FEF2F2 !important;
+  }
   
   table.mini{width:100%; border-collapse:collapse; margin-top:8px;}
   table.mini th{
@@ -89,7 +111,6 @@
   
   .row-actions{margin-top:12px;}
   
-  /* ปุ่มกดสไตล์ Premium UI สำหรับมือถือ */
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:12px;
     padding:14px 28px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
@@ -548,21 +569,28 @@ function line(label, name){
 function reviewForm(){
   const form = document.getElementById("appForm");
   
-  // สร้างระบบ Custom Alert แจ้งเตือนช่องว่างเพื่อให้รู้ตัวบนมือถือ
+  // เคลียร์สถานะไฮไลต์สีแดงของรอบเก่าออกก่อนตรวจสอบใหม่
+  const elements = form.querySelectorAll('input, select, textarea');
+  elements.forEach(el => el.classList.remove('field-error'));
+
+  // ระบบตรวจสอบและ Auto-Scroll ไปยังช่องข้อมูลแรกที่ลืมกรอกแทนการกดขึ้น Alert
   if(!form.reportValidity()){
-    let missingFields = [];
-    if(!val("app_date")) missingFields.push("- วันที่สมัคร");
-    if(!val("branch")) missingFields.push("- สาขาที่สมัคร");
-    if(!val("position")) missingFields.push("- ตำแหน่งที่สมัคร");
-    if(!val("full_name_th")) missingFields.push("- ชื่อ-นามสกุล (ไทย)");
-    if(!val("phone")) missingFields.push("- โทรศัพท์มือถือ");
-    if(!val("signature")) missingFields.push("- ลงชื่อผู้สมัครท้ายฟอร์ม");
-    
-    alert("⚠️ กรุณากรอกข้อมูลที่จำเป็นให้ครบถ้วน:\n" + (missingFields.length ? missingFields.join("\n") : "มีช่องข้อมูลสำคัญว่างอยู่"));
+    const firstInvalid = form.querySelector(':invalid');
+    if(firstInvalid){
+      firstInvalid.classList.add('field-error'); // ใส่กรอบสีแดงเน้นจุดผิด
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // เพิ่มความหน่วงเวลาเล็กน้อยเพื่อโฟกัสช่องข้อมูลให้เปิดแป้นพิมพ์อัตโนมัติ
+      setTimeout(() => { firstInvalid.focus(); }, 500);
+    }
     return;
   }
   
-  if(!document.getElementById("consentCheck").checked){
+  // ตรวจสอบเงื่อนไขข้อ 10 ยินยอมข้อมูล
+  const consentBox = document.getElementById("consentCheck");
+  if(!consentBox.checked){
+    consentBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    consentBox.focus();
     alert("กรุณายืนยันความยินยอมในข้อ 10 ก่อนบันทึกใบสมัคร");
     return;
   }
